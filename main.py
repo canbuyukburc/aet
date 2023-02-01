@@ -5,8 +5,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle, Frame
 
 # Create a PDF document with ReportLab
-pdf = SimpleDocTemplate("tuorial55.pdf", pagesize=letter)
-#pdf = canvas.Canvas("tuorial55.pdf")
+#pdf = SimpleDocTemplate("tuorial55.pdf", pagesize=letter)
+pdf = canvas.Canvas("tuorial55.pdf")
 # Get the pre-defined styles
 s = styles.getSampleStyleSheet()
 
@@ -44,7 +44,6 @@ empty_table=Table(empty)
 table_style=TableStyle([('BACKGROUND', (0, 0), (-1, -1), colors.white),
                 ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
                 ('FONTSIZE', (0, 0), (-1, -1), 10),
                 ('BOTTOMPADDING', (0, 0), (-1, -1),0),
                 ('BACKGROUND', (0, -1), (-1, -1), colors.white),
@@ -83,7 +82,8 @@ frame1.addFromList(flowables,pdf)
 frame2=Frame(35,580,10,90,showBoundary=1)
 frame2.addFromList(flowables4,pdf)
 
-#pdf.save()
+pdf.save()
 
 # Build the PDF document with the flowables
-pdf.build(flowables,flowables4)
+#pdf.build(flowables,flowables4)
+#                #('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
