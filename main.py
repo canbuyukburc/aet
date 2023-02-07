@@ -2,8 +2,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors, styles
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle, Frame
+from datetime import datetime
 
-pdf = canvas.Canvas("5.pdf")
+pdf = canvas.Canvas("aet_v1.pdf")
 # Get the pre-defined styles
 s = styles.getSampleStyleSheet()
 
@@ -68,7 +69,7 @@ Single_line_Table = Table(matrix(26,1),colWidths=[15,15])
 flowables.append(Single_line_Table)
 
 
-frame1=Frame(60,210,400,500,showBoundary=0)
+frame1=Frame(80,210,420,500,showBoundary=0)
 frame1.addFromList(flowables,pdf)
 
 #frame2=Frame(35,656,15,15,showBoundary=1)
@@ -77,7 +78,7 @@ frame1.addFromList(flowables,pdf)
 
 pdf.setFont('Helvetica-Bold', 11)
 # LEFT HEADER COLUMN
-Leftmargin = 52
+Leftmargin = 80
 FirstGrBottomMargin =656
 for k in alphabet_part1:
     pdf.drawString(Leftmargin,FirstGrBottomMargin,k)
@@ -102,16 +103,51 @@ for k in alphabet_part4:
 
 # MID NUMBERS
 mid_string = "              0          1        2         3         4         5         6           7          8           9"
-pdf.drawString(40,567,mid_string)
-pdf.drawString(40,458,mid_string)
-pdf.drawString(40,351,mid_string)
-pdf.drawString(40,220,mid_string)
+pdf.drawString(80,567,mid_string)
+pdf.drawString(80,458,mid_string)
+pdf.drawString(80,351,mid_string)
+pdf.drawString(80,220,mid_string)
 
 #TOP HEADER ROW
 BottomMargin = 670
-LeftStart = 68
+LeftStart = 98
 for i in alphabet:
     pdf.drawString(LeftStart,BottomMargin,i)
     LeftStart=LeftStart+15
+
+#PLACE TITLE    
+pdf.setFont('Helvetica-Bold', 18)
+pdf.setFillColorRGB(1,0,0)
+pdf.drawString(250,690,"AET-100")
+
+#PLACE DCS Disclaimer
+pdf.setFont('Helvetica',11)
+pdf.drawString(68,708,"Only for DCS")
+
+#PLACE EXERCISE OR Virtual Squadron info
+pdf.drawString(250,190,"Exercise TEST")
+#PLACE VERSION DATA
+#version is day and hour DDHHMMLMM
+now = datetime.now()
+timeString = now.strftime("%d%H%M") #/%m/%Y %H:%M:%S"
+pdf.setFont('Helvetica-Bold', 11)
+pdf.setFillColorRGB(0,0,0)
+version_string = f'Version : {timeString}'
+pdf.drawString(370,690,version_string)
+
+#
+uplx = 62
+uply = 720
+uprx = 500
+upry =uply
+dwnlx = uplx
+dwnly = 180
+dwnrx = uprx
+dwnry = dwnly
+
+pdf.line(uprx,upry,dwnrx,dwnry) #left
+pdf.line(uplx,uply,uprx,upry) #top
+pdf.line(uplx,uply,dwnlx,dwnly) #right
+pdf.line(dwnlx,dwnly,dwnrx,dwnry) #bottom
 
 pdf.save()
