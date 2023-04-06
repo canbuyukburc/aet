@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Generator</title>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('generate_pdf') }}">
+        <label for="Exercise_Name">Exercise Name:</label>
+        <input type="text" name="Exercise_Name" id="Exercise_Name">
+
+        <label for="Wing_Name">Wing Name:</label>
+        <input type="text" name="Wing_Name" id="Wing_Name">
+
+        <label for="Extra_Notes">Extra Notes:</label>
+        <input type="text" name="Extra_Notes" id="Extra_Notes">
+
+        <input type="submit" value="Generate PDF">
+    </form>
+</body>
+</html>
