@@ -139,6 +139,10 @@ def generate_pdf (Exerceise_Name, Wing_Name,Extra_Notes):
     pdf.setFillColorRGB(0,0,0)
     version_string = f'Version : {timeString}'
     pdf.drawString(370,690,version_string)
+    
+    Extra_String = f'REMARKS :{Extra_Notes}'
+    pdf.drawString(62,120,Extra_String)
+    
 
     #
     uplx = 62
